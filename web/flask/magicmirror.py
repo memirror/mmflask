@@ -39,15 +39,18 @@ class MagicMirror(MethodView):
 
 
 class MMIcon(MethodView):
+    
     def get(self):
         return send_file(os.path.join(here, "templates\magicmirror.ico"), mimetype="image/x-icon")
 
 
-@app.route("/")
-def home():
-    return render_template("home.html")
+class Home(MethodView):
+    
+    def get(self):
+        return render_template("home.html")
 
 
 app.add_url_rule('/mm', view_func=MagicMirror.as_view('mm'))
 app.add_url_rule("/icon", view_func=MMIcon.as_view("icon"))
+app.add_url_rule("/", view_func=Home.as_view("home"))
   
